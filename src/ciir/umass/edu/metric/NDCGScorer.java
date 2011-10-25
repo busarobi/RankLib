@@ -36,7 +36,7 @@ public class NDCGScorer extends MetricScorer {
 
 		double d2 = getIdealDCG(rel, k);
 		if(d2 <= 0.0)//I mean precisely "="
-			return 0.0;
+			return 0.5; //as the yahoo script does
 		return getDCG(rel, k)/d2;
 	}
 	public String name()

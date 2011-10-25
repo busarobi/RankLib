@@ -102,22 +102,31 @@ public class BestFeatureRanker extends Ranker {
 							new FileInputStream(fn), "ASCII"));
 			
 			int i=0;
+			int maxFeatureIndex = -1;
 			while((content = in.readLine()) != null)
 			{
-				content = content.trim();
-				if(content.length() == 0)
-					continue;
-				if(content.indexOf("##")==0)
-					continue;
-				i++;
 				//System.out.println( content );
 				if ( i==2)
 				{
 					System.out.println( "Best Feature " + content );					
-					bestFeature = Integer.parseInt(content);
-					break;
+					bestFeature = Integer.parseInt(content);					
 				}
+				if (i>3)
+				{
+					String[] fs = content.split(" ");
+					//System.out.println(fs[0]);
+					int tmpIdx = Integer.parseInt(fs[0]);
+					if ( maxFeatureIndex<tmpIdx) maxFeatureIndex = tmpIdx;  
+				}
+				
+				i++;
 			}
+			
+			features = new int[maxFeatureIndex];
+			for(int idx=0;idx<maxFeatureIndex;idx++)
+			{
+				features[idx] = idx+1;
+			}			
 			in.close();
 			
 			//bestFeature = 0;

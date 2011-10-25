@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class DataPoint {
 	public static float INFINITY = -1000000.0f;
-	public static int MAX_FEATURE = 51;
+	public static int MAX_FEATURE = 2000;
 	public static int FEATURE_INCREASE = 10;
 	
 	public static int featureCount = 0;
@@ -101,7 +101,7 @@ public class DataPoint {
 
 	public float getFeatureValue(int fid)
 	{
-		if(fid > fVals.length)
+		if(fid > fVals.length-1)
 			return 0.0f;
 		if(fVals[fid] < INFINITY+1)//+1 just to be safe
 			return 0.0f;
